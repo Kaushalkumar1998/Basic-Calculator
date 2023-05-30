@@ -1,0 +1,146 @@
+<div class="main-header">
+    <div class="header">
+        <div class="header_item">
+            <div class="header_items">
+                <button mat-fab color="primary" aria-label="Example icon button with a add icon"
+                    matTooltip="Add Employee info" (click)="openDialog('add', null)">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+        </button>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <span>
+            <button type="button" mat-button (click)="drawer.toggle()" class="toggle_btn">
+                Menu
+            </button>
+        </span>
+        <span class="card">
+            <mat-card class="card_items" appearance="outlined">
+                <mat-form-field class="header_items">
+                    <mat-label>Filter List</mat-label>
+                    <input matInput placeholder="Search User" matTooltip="Filter List" [formControl]="filterControl"
+                        (click)="filteredlistFunction()" />
+                    <mat-icon matSuffix>clear</mat-icon>
+                </mat-form-field>
+
+                <h1 style="text-align: center; margin-bottom: 0">Employees List</h1>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation">
+                        <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="position">
+                            <th mat-header-cell *matHeaderCellDef>S.no</th>
+                            <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef>Id</th>
+                            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let row">
+                                {{ row.name | titlecase }}
+                            </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="gender">
+                            <th mat-header-cell *matHeaderCellDef>Gender</th>
+                            <td mat-cell *matCellDef="let row">
+                                {{ row.gender }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dob">
+                            <th mat-header-cell *matHeaderCellDef>DOB</th>
+                            <td mat-cell *matCellDef="let row">
+                                {{ row.dob | date : "dd-MM-yyyy" }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="address">
+                            <th mat-header-cell *matHeaderCellDef>Address</th>
+                            <td mat-cell *matCellDef="let row">
+                                {{ row.address }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef>Action</th>
+                            <td mat-cell *matCellDef="let row">
+                                <button mat-raised-button color="primary" class="action_button" matTooltip="Update Info"
+                                    (click)="openDialog('edit', row)">
+                                    Update
+                                    <mat-icon matSuffix>edit</mat-icon>
+                                </button>
+
+                                <button mat-raised-button color="warn" class="action_button"
+                                    matTooltip="Do you want to Delete ?" (click)="openDeleteDialog(row.id)">
+                                    Delete
+                                    <mat-icon matSuffix>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+                    <mat-paginator showFirstLastButtons="firstLastButtons" [pageSizeOptions]="[5, 10, 25, 100]"
+                        [pageSize]="pageSize" [pageIndex]="pageNumber" color="warn" (page)="getServerData($event)"
+                        aria-label="Select page of users"></mat-paginator>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+</mat-drawer-container>
+
+<!-- <table>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Dob</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr *ngFor="let user of filteredList; let i = index">
+                        <th>{{ i + 1 }}</th>
+                        <th>{{ user.id }}</th>
+                        <th>{{ user.name }}</th>
+                        <th>{{ user.gender }}</th>
+                        <th>{{ user.dob | date : "dd-MM-yyyy" }}</th>
+                        <th>{{ user.address }}</th>
+                        <th class="action">
+                            <button mat-raised-button color="primary" class="action_button" matTooltip="Update Info"
+                                (click)="openDialog('edit', user)">
+                                Update
+                                <mat-icon matSuffix>edit</mat-icon>
+                            </button>
+
+                            <button mat-raised-button color="warn" class="action_button"
+                                matTooltip="Do you want to Delete ?" (click)="openDeleteDialog(user.id)">
+                                Delete
+                                <mat-icon matSuffix>delete</mat-icon>
+                            </button>
+                        </th>
+                    </tr>
+                </table> -->

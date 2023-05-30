@@ -1,0 +1,35 @@
+<p>login works!</p>
+<section>
+    <div class="body">
+        <div class="login-box">
+            <form>
+                <h2>Login</h2>
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="bi-person"></i>
+                    </span>
+                    <input formControlName="email" type="email" required />
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="bi bi-eye-slash"></i>
+                    </span>
+                    <input formControlName="password" type="password" required />
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label> <input type="checkbox" />Remember me</label>
+                    <a routerLink="/forgot-password">forgot-password</a>
+                </div>
+                <button type="submit" (click)="onLogin()">Login</button>
+                <div class="register-link">
+                    <p>
+                        Don't have an account?
+                        <a routerLink="/register">Register</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

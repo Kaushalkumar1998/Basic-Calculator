@@ -1,0 +1,24 @@
+<h3 style="text-align: center;">Image Upload Section</h3>
+<div class="main_div">
+    <div class="inputImage">
+
+
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="inputGroupFile02" (change)="onChange($event)">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+        </div>
+    </div>
+
+    <div class="editor">
+        <pintura-editor #inlineEditor [options]="editorOptions" [src]="inlineSrc"
+            [imageCropAspectRatio]="inlineCropAspectRatio" (load)="handleInlineLoad($event)"
+            (process)="handleInlineProcess($event)" layoutVerticalUtilsPreference="right" [handleEvent]="handleEvent"
+            [enableZoomControls]="enableZoomControls" style="background-color: aqua;"></pintura-editor>
+    </div>
+
+
+
+</div>
+<div style="width: 25px; margin: auto;">
+    <p style="margin: auto; width: 50%; padding-top: 20px;"><img *ngIf="inlineResult" [src]="inlineResult" alt="" /></p>
+</div>
